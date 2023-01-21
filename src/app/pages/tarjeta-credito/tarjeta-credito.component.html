@@ -1,0 +1,103 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-8 offset-lg-2">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="titulo">Tarjeta de Crédito</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+
+  <div class="row mt-5">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="titulo">Agregar Tarjeta</h5>
+
+
+          <form [formGroup]="form" (ngSubmit)="agregarTarjeta()">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">
+                <i class="fa-solid fa-user-tie"
+                [class.green-icon]="this.form.get('titulo')?.valid"
+                [class.red-icon]="this.form.get('titulo')?.invalid && this.form.get('titulo')?.touched "></i>
+              </span>
+              <input maxlength="35" formControlName="titulo" type="text" class="form-control" placeholder="Titular" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">
+                <i class="fa-regular fa-credit-card"
+                  [class.green-icon]="this.form.get('numeroTarjeta')?.valid"
+                  [class.red-icon]="this.form.get('numeroTarjeta')?.invalid && this.form.get('numeroTarjeta')?.touched"></i>
+              </span>
+              <input maxlength="16" formControlName="numeroTarjeta" type="text" class="form-control" placeholder="Número de Tarjeta" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">
+                <i class="fa-solid fa-ban"
+                  [class.green-icon]="this.form.get('fechaExpiracion')?.valid"
+                  [class.red-icon]="this.form.get('fechaExpiracion')?.invalid && this.form.get('fechaExpiracion')?.touched"></i>
+              </span>
+              <input formControlName="fechaExpiracion" maxlength="5" type="text" class="form-control" placeholder="MM/YY" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+          </div>
+
+          <div class="col-lg-6">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">
+                <i class="fa-solid fa-lock"
+                [class.green-icon]="this.form.get('cvv')?.valid"
+                [class.red-icon]="this.form.get('cvv')?.invalid && this.form.get('cvv')?.touched "></i>
+              </span>
+              <input formControlName="cvv" type="password" maxlength="3" class="form-control" placeholder="CVV" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </div>
+
+          </div>
+
+          <div class="d-grid gap-2">
+            <button [disabled]="this.form.invalid" type="submit" class="btn btn-light"> <i class="fa-solid fa-database" ></i>&nbsp;&nbsp;Agregar</button>
+          </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTADO -->
+
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="titulo">Listado de Tarjetas</h5>
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let tarjeta of listTarjetas; let i = index">
+                <td>{{tarjeta.titulo}}</td>
+                <td>{{tarjeta.numeroTarjeta}}</td>
+                <td>{{tarjeta.fechaExpiracion}}</td>
+                <td>{{tarjeta.cvv}}</td>
+                <td>
+                  <i class="fa-solid fa-file-pen text-info far"></i>
+                </td>
+                <td>
+                  <i (click)="eliminarTarjeta(i)" class="fa-sharp fa-solid fa-trash text-danger far"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
